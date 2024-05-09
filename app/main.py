@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-
+from app.schemas import StockIn
 app = FastAPI(title="Stock Prediction API")
 
-@app.get("/")
-async def root():
-    return {"message": "Welcome to Stock Prediction API"}
+@app.post("/predict")
+async def predict(stock_data: StockIn):
+    return {"prediction": "Not implemented"}
