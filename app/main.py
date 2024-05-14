@@ -3,8 +3,11 @@ from fastapi.responses import HTMLResponse
 from app.schemas import StockIn
 from app.services.data_service import fetch_stock_data
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(title="Stock Prediction API")
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
 
 templates = Jinja2Templates(directory="app/templates")
 
