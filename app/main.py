@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request,HTTPException
 from fastapi.responses import HTMLResponse
 from app.schemas import StockIn
 from app.services.data_service import fetch_stock_data
@@ -14,7 +14,10 @@ templates = Jinja2Templates(directory="app/templates")
 
 @app.post("/predict")
 async def predict(stock_data: StockIn):
-    df = fetch_stock_data(stock_data.ticker, stock_data.period, stock_data.interval)
+    try:
+        df = fetch_stock_data(stock_data.ticker, stock_data.period, stock_data.interval)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
     return {"data": df.shape}
 
 @app.get("/", response_class=HTMLResponse)
