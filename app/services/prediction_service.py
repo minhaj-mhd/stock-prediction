@@ -1,5 +1,9 @@
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
+from tensorflow.keras.models import load_model
+import os
+
+model = load_model(os.path.join(os.path.dirname(__file__), "../models/stock_model.h5"))
 
 
 def get_prediction(df, ticker):
