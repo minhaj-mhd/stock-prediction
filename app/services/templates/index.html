@@ -22,5 +22,19 @@
         const data = await response.json();
         document.getElementById('result').innerText = data.prediction;
     });
+    function updateChart(history) {
+        const ctx = document.getElementById('stock-chart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: history.map(item => item.Date),
+                datasets: [{
+                    label: 'Closing Price',
+                    data: history.map(item => item.Close),
+                    borderColor: 'rgb(75, 192, 192)'
+                }]
+            }
+        });
+    }
     </script>
 </html>
